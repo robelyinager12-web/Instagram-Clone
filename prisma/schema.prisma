@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FollowStatus {
+  PENDING
+  ACCEPTED
+}
+
+enum NotificationType {
+  LIKE_POST
+  LIKE_COMMENT
+  COMMENT
+  REPLY
+  MENTION
+  FOLLOW
+  FOLLOW_REQUEST
+  FOLLOW_ACCEPTED
+  MESSAGE
+  TAGGED
+}
+
+enum ReportReason {
+  SPAM
+  NUDITY
+  HATE_SPEECH
+  VIOLENCE
+  HARASSMENT
+  MISINFORMATION
+  INTELLECTUAL_PROPERTY
+  OTHER
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  ACTION_TAKEN
+  DISMISSED
+}
+
+enum ReportTargetType {
+  USER
+  POST
+  COMMENT
+  STORY
+  REEL
+  MESSAGE
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  VOICE
+  POST_SHARE
+  REEL_SHARE
+}
+
+enum ChatType {
+  DIRECT
+  GROUP
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum PostVisibility {
+  PUBLIC
+  FOLLOWERS_ONLY
+  CLOSE_FRIENDS
+}
+
+enum UserRole {
+  USER
+  MODERATOR
+  ADMIN
+}
