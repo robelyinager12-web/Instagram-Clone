@@ -29,12 +29,12 @@ export function Sidebar() {
   const openCreatePost = useCreatePostStore((s) => s.open);
 
   return (
-    <nav className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between border-r border-border px-3 py-6 md:flex">
+    <nav className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between border-r border-border px-3 py-6 lg:w-72 md:flex">
       <div>
-        <Link href="/feed" className="mb-8 block px-3 text-xl font-bold">
+        <Link href="/feed" className="mb-6 block px-3 py-2 text-2xl font-semibold tracking-tight">
           Instagram Clone
         </Link>
-        <ul className="space-y-1">
+        <ul className="space-y-0.5">
           {links.map(({ href, label, icon: Icon }) => {
             const isActive = pathname.startsWith(href);
             return (
@@ -42,11 +42,11 @@ export function Sidebar() {
                 <Link
                   href={href}
                   className={cn(
-                    "flex items-center gap-4 rounded-lg px-3 py-3 text-base transition-colors hover:bg-muted",
-                    isActive && "font-semibold"
+                    "flex items-center gap-4 rounded-xl px-3 py-3 text-[15px] transition-colors hover:bg-muted",
+                    isActive ? "font-semibold" : "font-normal"
                   )}
                 >
-                  <Icon className="h-6 w-6" />
+                  <Icon className="h-6 w-6" strokeWidth={isActive ? 2.25 : 1.75} />
                   {label}
                 </Link>
               </li>
@@ -55,18 +55,18 @@ export function Sidebar() {
           <li>
             <button
               onClick={openCreatePost}
-              className="flex w-full items-center gap-4 rounded-lg px-3 py-3 text-base transition-colors hover:bg-muted"
+              className="flex w-full items-center gap-4 rounded-xl px-3 py-3 text-[15px] transition-colors hover:bg-muted"
             >
-              <PlusSquare className="h-6 w-6" />
+              <PlusSquare className="h-6 w-6" strokeWidth={1.75} />
               Create
             </button>
           </li>
         </ul>
       </div>
 
-      <div className="flex items-center gap-3 px-3">
+      <div className="flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-muted">
         <UserButton afterSignOutUrl="/sign-in" />
-        <span className="text-sm text-muted-foreground">Account</span>
+        <span className="text-sm font-medium text-muted-foreground">Account</span>
       </div>
     </nav>
   );

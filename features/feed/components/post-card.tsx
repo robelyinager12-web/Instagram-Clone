@@ -50,7 +50,7 @@ export function PostCard({ post }: { post: FeedPost }) {
   const primaryMedia = post.media[0];
 
   return (
-    <article className="border-b border-border pb-4 sm:mb-6 sm:rounded-lg sm:border sm:pb-0">
+    <article className="border-b border-border pb-4 sm:mb-8 sm:overflow-hidden sm:rounded-xl sm:border sm:pb-0 sm:shadow-card">
       <header className="flex items-center gap-3 px-3 py-3">
         <Link href={`/profile/${post.author.username}`} className="shrink-0">
           <div className="h-8 w-8 overflow-hidden rounded-full bg-muted">

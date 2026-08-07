@@ -40,7 +40,7 @@ export function StoryTray({ viewerId }: { viewerId: string }) {
 
   if (isLoading) {
     return (
-      <div className="flex gap-4 overflow-x-auto px-4 py-4">
+      <div className="no-scrollbar flex gap-4 overflow-x-auto px-4 py-4">
         {Array.from({ length: 6 }).map((_, i) => (
           <div key={i} className="h-14 w-14 shrink-0 animate-pulse rounded-full bg-muted" />
         ))}
@@ -50,7 +50,7 @@ export function StoryTray({ viewerId }: { viewerId: string }) {
 
   return (
     <>
-      <div className="flex gap-4 overflow-x-auto px-4 py-4">
+      <div className="no-scrollbar flex gap-4 overflow-x-auto px-4 py-4">
         <div className="flex shrink-0 flex-col items-center gap-1">
           <button
             onClick={() =>
