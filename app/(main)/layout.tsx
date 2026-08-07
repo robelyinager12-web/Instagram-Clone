@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/current-user";
 import { Sidebar } from "@/components/layout/sidebar";
 import { BottomNav } from "@/components/layout/bottom-nav";
+import { CreatePostModal } from "@/features/posts/components/create-post-modal";
 
 export default async function MainLayout({
   children,
@@ -16,6 +17,7 @@ export default async function MainLayout({
       <Sidebar />
       <main className="flex-1 pb-14 md:pb-0">{children}</main>
       <BottomNav />
+      <CreatePostModal />
     </div>
   );
 }

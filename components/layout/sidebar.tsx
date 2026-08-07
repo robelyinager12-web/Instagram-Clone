@@ -13,6 +13,7 @@ import {
   PlusSquare,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCreatePostStore } from "@/store/create-post-store";
 
 const links = [
   { href: "/feed", label: "Home", icon: Home },
@@ -25,6 +26,7 @@ const links = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const openCreatePost = useCreatePostStore((s) => s.open);
 
   return (
     <nav className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col justify-between border-r border-border px-3 py-6 md:flex">
@@ -51,7 +53,10 @@ export function Sidebar() {
             );
           })}
           <li>
-            <button className="flex w-full items-center gap-4 rounded-lg px-3 py-3 text-base transition-colors hover:bg-muted">
+            <button
+              onClick={openCreatePost}
+              className="flex w-full items-center gap-4 rounded-lg px-3 py-3 text-base transition-colors hover:bg-muted"
+            >
               <PlusSquare className="h-6 w-6" />
               Create
             </button>
