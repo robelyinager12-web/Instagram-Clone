@@ -5,11 +5,6 @@ export type UploadResult = {
   resourceType: "image" | "video";
 };
 
-/**
- * 1. Ask our server for a signed upload (keeps the API secret server-side).
- * 2. POST the file straight to Cloudinary from the browser — the file
- *    bytes never round-trip through our own server.
- */
 export async function uploadFileToCloudinary(
   file: File,
   folder: string
@@ -19,7 +14,10 @@ export async function uploadFileToCloudinary(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ folder }),
   });
-  if (!sigRes.ok) throw new Error("Could not get upload authorization");
+  if (!sigRes.ok) {
+    const text = await sigRes.text().catch(() => "");
+    throw new Error(`Could not get upload authorization: ${sigRes.status} ${text}`);
+  }
 
   const { timestamp, signature, apiKey, cloudName } = await sigRes.json();
 
@@ -37,7 +35,11 @@ export async function uploadFileToCloudinary(
     { method: "POST", body: formData }
   );
 
-  if (!uploadRes.ok) throw new Error("Upload to Cloudinary failed");
+  if (!uploadRes.ok) {
+    const errorBody = await uploadRes.json().catch(() => null);
+    const message = errorBody?.error?.message ?? `HTTP ${uploadRes.status}`;
+    throw new Error(`Upload to Cloudinary failed: ${message}`);
+  }
 
   const data = await uploadRes.json();
   return {
